@@ -1,0 +1,73 @@
+.chart-section canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.chart-stats {
+  animation: fadeIn 500ms ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-item {
+  transition: all 200ms ease;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.stat-item:hover {
+  background: var(--color-bg, #f5f7fa);
+}
+
+.stat-value {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container {
+    height: 200px;
+  }
+
+  .chart-stats {
+    font-size: 0.9rem;
+  }
+
+  .stat-value {
+    font-size: 1rem;
+  }
+}
+
+@media print {
+  .chart-section {
+    page-break-inside: avoid;
+  }
+
+  .chart-container {
+    height: 400px;
+  }
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive US Map - Progress Tracker</title>
+    <meta name="description" content="Interactive map of the United States showing project status by state">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/chart.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>MAPA USA - PROGRESS BY STATE</h1>
+            <p class="subtitle">Interactive map showing status by state</p>
+        </header>
+
+        <main class="main-content">
+            <div class="map-section">
+                <div class="filter-controls" role="toolbar" aria-label="Status filters">
+                    <button class="filter-btn active" data-status="all" aria-pressed="true">
+                        Show All
+                    </button>
+                    <button class="filter-btn" data-status="done" aria-pressed="false">
+                        <span class="status-dot status-done"></span>
+                        Done (30)
+                    </button>
+                    <button class="filter-btn" data-status="in-progress" aria-pressed="false">
+                        <span class="status-dot status-in-progress"></span>
+                        In Progress (1)
+                    </button>
+                    <button class="filter-btn" data-status="ready" aria-pressed="false">
+                        <span class="status-dot status-ready"></span>
+                        Ready to Sprint (9)
+                    </button>
+                    <button class="filter-btn" data-status="to-specify" aria-pressed="false">
+                        <span class="status-dot status-to-specify"></span>
+                        To be Specified (9)
+                    </button>
+                    <button class="filter-btn" data-status="todo" aria-pressed="false">
+                        <span class="status-dot status-todo"></span>
+                        To Do (1)
+                    </button>
+                </div>
+
+                <div class="map-container" role="region" aria-label="Interactive US Map">
+                    <div id="us-map"></div>
+                </div>
+
+                <div class="legend">
+                    <h3>Status Legend</h3>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <span class="legend-color status-done"></span>
+                            <span>Done (60%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color status-in-progress"></span>
+                            <span>In Progress (2%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color status-ready"></span>
+                            <span>Ready to Sprint (18%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color status-to-specify"></span>
+                            <span>To be Specified (18%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color status-todo"></span>
+                            <span>To Do (2%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="sidebar">
+                <div class="chart-section">
+                    <h2>Progress Overview</h2>
+                    <div class="chart-container">
+                        <canvas id="progress-chart" role="img" aria-label="Donut chart showing project progress distribution"></canvas>
+                    </div>
+                    <div class="chart-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Total States:</span>
+                            <span class="stat-value">50</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Completed:</span>
+                            <span class="stat-value">30 (60%)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Remaining:</span>
+                            <span class="stat-value">20 (40%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-panel" id="detail-panel" hidden>
+                    <h3>State Details</h3>
+                    <div class="detail-content">
+                        <p class="detail-name"></p>
+                        <p class="detail-status"></p>
+                        <p class="detail-region"></p>
+                    </div>
+                    <button class="close-detail" aria-label="Close details">×</button>
+                </div>
+            </aside>
+        </main>
+
+        <footer class="footer">
+            <p>Click on any state to see details • Hover for quick info • Use filters to focus on specific statuses</p>
+        </footer>
+    </div>
+
+    <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
