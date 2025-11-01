@@ -1,7 +1,7 @@
 {
-  "done": 50,
-  "in-progress": 0,
-  "ready": 0,
-  "to-specify": 0,
-  "todo": 0
+  "done": 10,
+  "in-progress": 10,
+  "ready": 10,
+  "to-specify": 20,
+  "todo": 10
 }
