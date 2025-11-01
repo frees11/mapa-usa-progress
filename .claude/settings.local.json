@@ -24,7 +24,9 @@
       "Bash(netlify sites:create:*)",
       "Bash(netlify init:*)",
       "Bash(chmod:*)",
-      "Bash(./build.sh:*)"
+      "Bash(./build.sh:*)",
+      "Bash(cat:*)",
+      "Bash(git checkout:*)"
     ],
     "deny": [],
     "ask": []
