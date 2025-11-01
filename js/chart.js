@@ -17,34 +17,30 @@ export class ChartManager {
     const counts = this.counts || {
       [STATUS.DONE]: 0,
       [STATUS.IN_PROGRESS]: 0,
-      [STATUS.READY]: 0,
-      [STATUS.TO_SPECIFY]: 0,
-      [STATUS.TODO]: 0
+      [STATUS.READY_TO_DEV]: 0,
+      [STATUS.TEST]: 0
     };
 
     const data = {
       labels: [
         STATUS_LABELS[STATUS.DONE],
         STATUS_LABELS[STATUS.IN_PROGRESS],
-        STATUS_LABELS[STATUS.READY],
-        STATUS_LABELS[STATUS.TO_SPECIFY],
-        STATUS_LABELS[STATUS.TODO]
+        STATUS_LABELS[STATUS.READY_TO_DEV],
+        STATUS_LABELS[STATUS.TEST]
       ],
       datasets: [{
         label: 'States by Status',
         data: [
           counts[STATUS.DONE],
           counts[STATUS.IN_PROGRESS],
-          counts[STATUS.READY],
-          counts[STATUS.TO_SPECIFY],
-          counts[STATUS.TODO]
+          counts[STATUS.READY_TO_DEV],
+          counts[STATUS.TEST]
         ],
         backgroundColor: [
           STATUS_COLORS[STATUS.DONE],
           STATUS_COLORS[STATUS.IN_PROGRESS],
-          STATUS_COLORS[STATUS.READY],
-          STATUS_COLORS[STATUS.TO_SPECIFY],
-          STATUS_COLORS[STATUS.TODO]
+          STATUS_COLORS[STATUS.READY_TO_DEV],
+          STATUS_COLORS[STATUS.TEST]
         ],
         borderWidth: 2,
         borderColor: '#ffffff'
@@ -116,9 +112,8 @@ export class ChartManager {
     this.chart.data.datasets[0].data = [
       counts[STATUS.DONE],
       counts[STATUS.IN_PROGRESS],
-      counts[STATUS.READY],
-      counts[STATUS.TO_SPECIFY],
-      counts[STATUS.TODO]
+      counts[STATUS.READY_TO_DEV],
+      counts[STATUS.TEST]
     ];
 
     this.chart.update();
@@ -133,17 +128,15 @@ export class ChartManager {
       this.chart.data.datasets[0].data = [
         counts[STATUS.DONE],
         counts[STATUS.IN_PROGRESS],
-        counts[STATUS.READY],
-        counts[STATUS.TO_SPECIFY],
-        counts[STATUS.TODO]
+        counts[STATUS.READY_TO_DEV],
+        counts[STATUS.TEST]
       ];
     } else {
       this.chart.data.datasets[0].data = [
         activeFilters.includes(STATUS.DONE) ? counts[STATUS.DONE] : 0,
         activeFilters.includes(STATUS.IN_PROGRESS) ? counts[STATUS.IN_PROGRESS] : 0,
-        activeFilters.includes(STATUS.READY) ? counts[STATUS.READY] : 0,
-        activeFilters.includes(STATUS.TO_SPECIFY) ? counts[STATUS.TO_SPECIFY] : 0,
-        activeFilters.includes(STATUS.TODO) ? counts[STATUS.TODO] : 0
+        activeFilters.includes(STATUS.READY_TO_DEV) ? counts[STATUS.READY_TO_DEV] : 0,
+        activeFilters.includes(STATUS.TEST) ? counts[STATUS.TEST] : 0
       ];
     }
 
