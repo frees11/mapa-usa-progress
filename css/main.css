@@ -1,9 +1,8 @@
 :root {
   --color-done: #4CAF50;
   --color-in-progress: #2196F3;
-  --color-ready: #FFC107;
-  --color-to-specify: #FF9800;
-  --color-todo: #9E9E9E;
+  --color-ready-to-dev: #FFC107;
+  --color-test: #FF9800;
 
   --color-bg: #f5f7fa;
   --color-card-bg: #ffffff;
@@ -139,9 +138,8 @@ body {
 
 .status-done { background-color: var(--color-done); }
 .status-in-progress { background-color: var(--color-in-progress); }
-.status-ready { background-color: var(--color-ready); }
-.status-to-specify { background-color: var(--color-to-specify); }
-.status-todo { background-color: var(--color-todo); }
+.status-ready-to-dev { background-color: var(--color-ready-to-dev); }
+.status-test { background-color: var(--color-test); }
 
 .map-container {
   background: var(--color-card-bg);

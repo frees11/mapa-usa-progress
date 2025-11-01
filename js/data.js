@@ -1,25 +1,22 @@
 export const STATUS = {
   DONE: 'done',
   IN_PROGRESS: 'in-progress',
-  READY: 'ready',
-  TO_SPECIFY: 'to-specify',
-  TODO: 'todo'
+  READY_TO_DEV: 'ready-to-dev',
+  TEST: 'test'
 };
 
 export const STATUS_LABELS = {
   [STATUS.DONE]: 'Done',
   [STATUS.IN_PROGRESS]: 'In Progress',
-  [STATUS.READY]: 'Ready to Sprint',
-  [STATUS.TO_SPECIFY]: 'To be Specified',
-  [STATUS.TODO]: 'To Do'
+  [STATUS.READY_TO_DEV]: 'Ready to Dev',
+  [STATUS.TEST]: 'Test'
 };
 
 export const STATUS_COLORS = {
   [STATUS.DONE]: '#4CAF50',
   [STATUS.IN_PROGRESS]: '#2196F3',
-  [STATUS.READY]: '#FFC107',
-  [STATUS.TO_SPECIFY]: '#FF9800',
-  [STATUS.TODO]: '#9E9E9E'
+  [STATUS.READY_TO_DEV]: '#FFC107',
+  [STATUS.TEST]: '#FF9800'
 };
 
 export const stateData = {
@@ -98,9 +95,8 @@ export function getStatusCounts() {
   const counts = {
     [STATUS.DONE]: 0,
     [STATUS.IN_PROGRESS]: 0,
-    [STATUS.READY]: 0,
-    [STATUS.TO_SPECIFY]: 0,
-    [STATUS.TODO]: 0,
+    [STATUS.READY_TO_DEV]: 0,
+    [STATUS.TEST]: 0,
     total: 0
   };
 
@@ -138,9 +134,8 @@ export function getRegionalStats() {
       total: region.states.length,
       [STATUS.DONE]: 0,
       [STATUS.IN_PROGRESS]: 0,
-      [STATUS.READY]: 0,
-      [STATUS.TO_SPECIFY]: 0,
-      [STATUS.TODO]: 0
+      [STATUS.READY_TO_DEV]: 0,
+      [STATUS.TEST]: 0
     };
 
     for (const stateCode of region.states) {

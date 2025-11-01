@@ -13,9 +13,8 @@ export class ConfigLoader {
       return {
         'done': 0,
         'in-progress': 0,
-        'ready': 0,
-        'to-specify': 0,
-        'todo': 0
+        'ready-to-dev': 0,
+        'test': 0
       };
     }
   }
@@ -24,9 +23,8 @@ export class ConfigLoader {
     const counts = {
       'done': config['done'] || 0,
       'in-progress': config['in-progress'] || 0,
-      'ready': config['ready'] || 0,
-      'to-specify': config['to-specify'] || 0,
-      'todo': config['todo'] || 0
+      'ready-to-dev': config['ready-to-dev'] || 0,
+      'test': config['test'] || 0
     };
 
     const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
@@ -50,7 +48,7 @@ export class ConfigLoader {
     const stateMapping = {};
 
     let index = 0;
-    const statusOrder = ['done', 'in-progress', 'ready', 'to-specify', 'todo'];
+    const statusOrder = ['done', 'in-progress', 'ready-to-dev', 'test'];
 
     for (const status of statusOrder) {
       const count = config[status] || 0;
@@ -61,7 +59,7 @@ export class ConfigLoader {
     }
 
     while (index < allStates.length) {
-      stateMapping[allStates[index]] = 'todo';
+      stateMapping[allStates[index]] = 'test';
       index++;
     }
 

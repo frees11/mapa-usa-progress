@@ -71,11 +71,12 @@ class App {
     });
 
     const legendItems = document.querySelectorAll('.legend-item span:last-child');
-    legendItems[0].textContent = `Done (${percentages['done']}%)`;
-    legendItems[1].textContent = `In Progress (${percentages['in-progress']}%)`;
-    legendItems[2].textContent = `Ready to Sprint (${percentages['ready']}%)`;
-    legendItems[3].textContent = `To be Specified (${percentages['to-specify']}%)`;
-    legendItems[4].textContent = `To Do (${percentages['todo']}%)`;
+    if (legendItems.length >= 4) {
+      legendItems[0].textContent = `Done (${percentages['done']}%)`;
+      legendItems[1].textContent = `In Progress (${percentages['in-progress']}%)`;
+      legendItems[2].textContent = `Ready to Dev (${percentages['ready-to-dev']}%)`;
+      legendItems[3].textContent = `Test (${percentages['test']}%)`;
+    }
 
     const statValues = document.querySelectorAll('.stat-value');
     if (statValues.length >= 3) {

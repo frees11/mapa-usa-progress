@@ -1,7 +1,7 @@
 {
-  "done": 30,
-  "in-progress": 1,
-  "ready": 9,
-  "to-specify": 9,
-  "todo": 1
+  "version": "1.0.0",
+  "done": 10,
+  "in-progress": 10,
+  "ready-to-dev": 15,
+  "test": 15
 }
