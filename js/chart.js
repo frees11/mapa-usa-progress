@@ -1,9 +1,10 @@
-import { STATUS, STATUS_LABELS, STATUS_COLORS, getStatusCounts } from './data.js';
+import { STATUS, STATUS_LABELS, STATUS_COLORS } from './data.js';
 
 export class ChartManager {
-  constructor(canvasId) {
+  constructor(canvasId, initialCounts = null) {
     this.canvas = document.getElementById(canvasId);
     this.chart = null;
+    this.counts = initialCounts;
     this.init();
   }
 
@@ -13,7 +14,13 @@ export class ChartManager {
       return;
     }
 
-    const counts = getStatusCounts();
+    const counts = this.counts || {
+      [STATUS.DONE]: 0,
+      [STATUS.IN_PROGRESS]: 0,
+      [STATUS.READY]: 0,
+      [STATUS.TO_SPECIFY]: 0,
+      [STATUS.TODO]: 0
+    };
 
     const data = {
       labels: [
@@ -102,10 +109,25 @@ export class ChartManager {
     this.chart = new Chart(this.canvas, config);
   }
 
-  update(activeFilters) {
+  updateCounts(counts) {
+    this.counts = counts;
     if (!this.chart) return;
 
-    const counts = getStatusCounts();
+    this.chart.data.datasets[0].data = [
+      counts[STATUS.DONE],
+      counts[STATUS.IN_PROGRESS],
+      counts[STATUS.READY],
+      counts[STATUS.TO_SPECIFY],
+      counts[STATUS.TODO]
+    ];
+
+    this.chart.update();
+  }
+
+  update(activeFilters) {
+    if (!this.chart || !this.counts) return;
+
+    const counts = this.counts;
 
     if (activeFilters.includes('all') || activeFilters.length === 0) {
       this.chart.data.datasets[0].data = [

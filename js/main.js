@@ -50,7 +50,7 @@ class App {
 
     this.mapController = new MapController(this.mapContainer, this.tooltip);
 
-    this.chartManager = new ChartManager('progress-chart');
+    this.chartManager = new ChartManager('progress-chart', this.stats.counts);
 
     this.filterController = new FilterController(
       this.mapController,
