@@ -1,69 +1,134 @@
-# Deployment Guide for Interactive US Map
+# Deployment Guide - GitHub Pages
 
-Your interactive US map is ready to deploy! Here are the easiest options:
+This project is configured to automatically deploy to GitHub Pages on every push to the `main` branch.
 
-## Option 1: Netlify Drop (Easiest - No Account Needed Initially)
+## Quick Setup (One-Time)
 
-1. **Visit**: https://app.netlify.com/drop
-2. **Drag and drop** the entire `hand-drawn-usa-outline-map-illustration` folder onto the page
-3. **Done!** You'll get a live URL instantly (e.g., `https://random-name-123456.netlify.app`)
+### Enable GitHub Pages
 
-## Option 2: Vercel (Quick Setup)
+1. Go to your repository: https://github.com/frees11/mapa-usa-progress
+2. Click **Settings** → **Pages** (left sidebar)
+3. Under **Source**, select: **GitHub Actions**
+4. Click **Save**
 
-1. **Install Vercel CLI**: `npm install -g vercel`
-2. **Navigate to folder**: `cd /Users/frees/Downloads/hand-drawn-usa-outline-map-illustration`
-3. **Deploy**: `vercel --prod`
-4. **Follow prompts** to create account and deploy
+**That's it!** No secrets, tokens, or configuration needed.
 
-## Option 3: GitHub Pages (Free, Custom Domain Support)
+## Your Site URL
 
-### Step 1: Create GitHub Repository
-```bash
-cd /Users/frees/Downloads/hand-drawn-usa-outline-map-illustration
+After enabling GitHub Pages, your site will be available at:
 
-# Login to GitHub CLI (if not already logged in)
-gh auth login
+**https://frees11.github.io/mapa-usa-progress/**
 
-# Create a new public repository
-gh repo create mapa-usa-progress --public --source=. --push
+## How It Works
 
-# Enable GitHub Pages
-gh repo edit --enable-pages --pages-branch main
-```
+Every time you push to `main`:
 
-### Step 2: Access Your Site
-Your site will be live at: `https://[your-username].github.io/mapa-usa-progress/`
+1. **Build Script** runs (`build.sh`):
+   - Generates unique version timestamp
+   - Updates `config.json` version
+   - Injects version into CSS/JS URLs for cache busting
 
-## Option 4: Surge.sh (Ultra Simple)
+2. **GitHub Actions** workflow deploys:
+   - Checks out code
+   - Runs build script
+   - Uploads site to GitHub Pages
+   - Deploys automatically
 
-```bash
-# Install Surge
-npm install -g surge
+3. **Your Site** updates:
+   - Live within ~1 minute
+   - Cache automatically cleared
+   - Users see changes within 10 seconds
 
-# Navigate to folder
-cd /Users/frees/Downloads/hand-drawn-usa-outline-map-illustration
+## Updating the Map
 
-# Deploy (will prompt for account creation)
-surge
-```
+To update status counts:
 
-## Files Included in Deployment
+1. Edit `config.json`:
+   ```json
+   {
+     "version": "1.0.0",
+     "done": 15,
+     "in-progress": 10,
+     "ready-to-dev": 15,
+     "test": 10
+   }
+   ```
 
-✅ `index.html` - Main HTML file
-✅ `css/` - All stylesheets (main.css, map.css, chart.css)
-✅ `js/` - All JavaScript modules
-✅ `assets/` - SVG map file
-✅ Chart.js loaded from CDN (no download needed)
+2. Commit and push:
+   ```bash
+   git add config.json
+   git commit -m "Update status counts"
+   git push
+   ```
 
-## Current Git Status
+3. Wait ~1 minute
+4. Changes are live! ✨
 
-Repository is initialized with all files committed. You can push to any Git-based hosting service.
+## Benefits of GitHub Pages
 
-```bash
-git remote add origin <your-repo-url>
-git push -u origin main
-```
+✅ **Free** - Unlimited deployments, no cost
+✅ **Fast** - Deploy in ~1 minute
+✅ **Automatic** - Push and forget
+✅ **Reliable** - GitHub's infrastructure
+✅ **SSL** - HTTPS by default
+✅ **No Limits** - Deploy as much as you want (no Netlify restrictions!)
 
-## Recommended: Option 1 (Netlify Drop)
+## Deployment Status
 
-The fastest way is Netlify Drop - literally just drag and drop your folder!
+Check deployment status:
+- Go to: https://github.com/frees11/mapa-usa-progress/actions
+- See all deployments and their status
+- Click any workflow to see details
+
+## Troubleshooting
+
+### Site not updating?
+
+1. Check Actions tab: https://github.com/frees11/mapa-usa-progress/actions
+2. Look for any failed workflows
+3. Click on the workflow to see error details
+
+### 404 error?
+
+1. Make sure GitHub Pages is enabled: Settings → Pages
+2. Check that source is set to "GitHub Actions"
+3. Wait 2-3 minutes after first enabling
+
+### Old content showing?
+
+The cache buster handles this automatically:
+- Checks for new version every 10 seconds
+- Forces reload when version changes
+- Manual hard refresh: Ctrl+F5 (Windows) or Cmd+Shift+R (Mac)
+
+## Custom Domain (Optional)
+
+To use your own domain:
+
+1. Go to Settings → Pages
+2. Enter your custom domain
+3. Add DNS records (GitHub shows instructions)
+4. Enable "Enforce HTTPS"
+
+## Manual Trigger
+
+To manually trigger deployment:
+
+1. Go to: https://github.com/frees11/mapa-usa-progress/actions
+2. Click "Deploy to GitHub Pages" workflow
+3. Click "Run workflow"
+4. Select `main` branch and run
+
+## Migration from Netlify
+
+Netlify configuration has been removed:
+- ❌ `netlify.toml` deleted
+- ❌ No Netlify secrets needed
+- ✅ GitHub Pages enabled
+- ✅ Automatic deployments configured
+
+## Cost
+
+**$0** - Completely free for public repositories!
+
+No deployment limits, no build minutes limits, no bandwidth limits.

@@ -26,7 +26,8 @@
       "Bash(chmod:*)",
       "Bash(./build.sh:*)",
       "Bash(cat:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(test:*)"
     ],
     "deny": [],
     "ask": []
