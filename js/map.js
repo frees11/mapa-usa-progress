@@ -37,6 +37,7 @@ export class MapController {
   handleMouseEnter(event) {
     const state = event.target;
     const stateCode = state.dataset.state;
+    const status = state.dataset.status;
     const stateInfo = stateData[stateCode];
 
     if (!stateInfo) return;
@@ -47,13 +48,14 @@ export class MapController {
       event.clientX,
       event.clientY,
       stateInfo.name,
-      STATUS_LABELS[stateInfo.status]
+      STATUS_LABELS[status]
     );
   }
 
   handleMouseMove(event) {
     const state = event.target;
     const stateCode = state.dataset.state;
+    const status = state.dataset.status;
     const stateInfo = stateData[stateCode];
 
     if (!stateInfo) return;
@@ -62,7 +64,7 @@ export class MapController {
       event.clientX,
       event.clientY,
       stateInfo.name,
-      STATUS_LABELS[stateInfo.status]
+      STATUS_LABELS[status]
     );
   }
 
@@ -77,6 +79,7 @@ export class MapController {
   handleStateClick(event) {
     const state = event.target;
     const stateCode = state.dataset.state;
+    const status = state.dataset.status;
     const stateInfo = stateData[stateCode];
 
     if (!stateInfo) return;
@@ -91,18 +94,19 @@ export class MapController {
     } else {
       this.selectedState = state;
       state.classList.add('state-selected');
-      this.showDetailPanel(stateInfo);
+      this.showDetailPanel(stateInfo, status);
     }
 
     window.dispatchEvent(new CustomEvent('stateSelected', {
       detail: {
         code: stateCode,
+        status: status,
         ...stateInfo
       }
     }));
   }
 
-  showDetailPanel(stateInfo) {
+  showDetailPanel(stateInfo, status) {
     const panel = document.getElementById('detail-panel');
     if (!panel) return;
 
@@ -112,8 +116,8 @@ export class MapController {
 
     if (nameEl) nameEl.textContent = stateInfo.name;
     if (statusEl) {
-      statusEl.textContent = `Status: ${STATUS_LABELS[stateInfo.status]}`;
-      statusEl.className = `detail-status status-${stateInfo.status}`;
+      statusEl.textContent = `Status: ${STATUS_LABELS[status]}`;
+      statusEl.className = `detail-status status-${status}`;
     }
     if (regionEl) regionEl.textContent = `Region: ${stateInfo.region}`;
 
