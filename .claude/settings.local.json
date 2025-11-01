@@ -27,7 +27,8 @@
       "Bash(./build.sh:*)",
       "Bash(cat:*)",
       "Bash(git checkout:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(gh run list:*)"
     ],
     "deny": [],
     "ask": []
