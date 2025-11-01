@@ -11,23 +11,24 @@ export async function createUSMap() {
   }
 }
 
-export function colorizeMap() {
-  const stateIds = Object.keys(stateData);
+export function colorizeMap(config = null) {
+  const stateIds = config ? Object.keys(config.states) : Object.keys(stateData);
 
   for (const code of stateIds) {
+    const status = config ? config.states[code] : stateData[code].status;
     const state = stateData[code];
     const stateElement = document.getElementById(code);
 
-    if (stateElement) {
+    if (stateElement && state) {
       stateElement.classList.add('state');
-      stateElement.style.fill = STATUS_COLORS[state.status];
+      stateElement.style.fill = STATUS_COLORS[status];
       stateElement.style.stroke = '#2c3e50';
       stateElement.style.strokeWidth = '1';
       stateElement.dataset.state = code;
-      stateElement.dataset.status = state.status;
+      stateElement.dataset.status = status;
       stateElement.dataset.name = state.name;
       stateElement.dataset.region = state.region;
-      stateElement.setAttribute('aria-label', `${state.name} - ${STATUS_LABELS[state.status]}`);
+      stateElement.setAttribute('aria-label', `${state.name} - ${STATUS_LABELS[status]}`);
       stateElement.setAttribute('tabindex', '0');
       stateElement.setAttribute('role', 'button');
     } else {
