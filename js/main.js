@@ -21,6 +21,7 @@ class App {
     try {
       this.config = await ConfigLoader.loadConfig();
       this.stats = ConfigLoader.calculateStats(this.config);
+      this.stateMapping = ConfigLoader.generateStateMapping(this.config);
 
       await this.renderMap();
       this.initializeComponents();
@@ -41,7 +42,7 @@ class App {
 
     const svgMap = await createUSMap();
     this.mapContainer.innerHTML = svgMap;
-    colorizeMap(this.config);
+    colorizeMap(this.stateMapping);
   }
 
   initializeComponents() {

@@ -1,3 +1,5 @@
+import { stateData } from './data.js';
+
 export class ConfigLoader {
   static async loadConfig() {
     try {
@@ -9,27 +11,25 @@ export class ConfigLoader {
     } catch (error) {
       console.error('Error loading config:', error);
       return {
-        states: {}
+        'done': 0,
+        'in-progress': 0,
+        'ready': 0,
+        'to-specify': 0,
+        'todo': 0
       };
     }
   }
 
   static calculateStats(config) {
     const counts = {
-      'done': 0,
-      'in-progress': 0,
-      'ready': 0,
-      'to-specify': 0,
-      'todo': 0
+      'done': config['done'] || 0,
+      'in-progress': config['in-progress'] || 0,
+      'ready': config['ready'] || 0,
+      'to-specify': config['to-specify'] || 0,
+      'todo': config['todo'] || 0
     };
 
-    for (const status of Object.values(config.states)) {
-      if (counts.hasOwnProperty(status)) {
-        counts[status]++;
-      }
-    }
-
-    const total = Object.keys(config.states).length;
+    const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
 
     const percentages = {};
     for (const [status, count] of Object.entries(counts)) {
@@ -43,5 +43,28 @@ export class ConfigLoader {
       completed: counts['done'],
       remaining: total - counts['done']
     };
+  }
+
+  static generateStateMapping(config) {
+    const allStates = Object.keys(stateData);
+    const stateMapping = {};
+
+    let index = 0;
+    const statusOrder = ['done', 'in-progress', 'ready', 'to-specify', 'todo'];
+
+    for (const status of statusOrder) {
+      const count = config[status] || 0;
+      for (let i = 0; i < count && index < allStates.length; i++) {
+        stateMapping[allStates[index]] = status;
+        index++;
+      }
+    }
+
+    while (index < allStates.length) {
+      stateMapping[allStates[index]] = 'todo';
+      index++;
+    }
+
+    return stateMapping;
   }
 }

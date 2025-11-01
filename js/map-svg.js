@@ -11,11 +11,11 @@ export async function createUSMap() {
   }
 }
 
-export function colorizeMap(config = null) {
-  const stateIds = config ? Object.keys(config.states) : Object.keys(stateData);
+export function colorizeMap(stateMapping = null) {
+  const stateIds = Object.keys(stateData);
 
   for (const code of stateIds) {
-    const status = config ? config.states[code] : stateData[code].status;
+    const status = stateMapping ? stateMapping[code] : stateData[code].status;
     const state = stateData[code];
     const stateElement = document.getElementById(code);
 
