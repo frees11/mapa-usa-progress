@@ -22,7 +22,9 @@
       "Bash(git commit:*)",
       "Bash(git push)",
       "Bash(netlify sites:create:*)",
-      "Bash(netlify init:*)"
+      "Bash(netlify init:*)",
+      "Bash(chmod:*)",
+      "Bash(./build.sh:*)"
     ],
     "deny": [],
     "ask": []

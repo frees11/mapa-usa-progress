@@ -12,6 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Build with cache busting
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
         with:
